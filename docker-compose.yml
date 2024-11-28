@@ -1,18 +1,6 @@
 version: "3.9"
 
 services:
-  nginx:
-    depends_on:
-      - nuxt
-      - flask # Указываем, что Nginx зависит и от Flask
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./logs:/var/log/nginx/
-    restart: always
-
   nuxt:
     build:
       context: ./itam-app
