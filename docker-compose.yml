@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  nginx:
+    depends_on:
+      - nuxt
+      - flask # Указываем, что Nginx зависит и от Flask
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./logs:/var/log/nginx/
+    restart: always
+
+  nuxt:
+    build:
+      context: ./itam-app
+      dockerfile: DockerFile
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    restart: always
+
+  flask:
+    build:
+      context: ./backend # Папка, где находится ваш Flask проект
+      dockerfile: Dockerfile # Указываем файл Dockerfile для Flask
+    expose:
+      - "5001"
+    ports:
+      - "5001:5001" # Пробрасываем порт 5001 из контейнера на хост
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_NAME=vuepy
+      - DATABASE_USER=myuser
+      - DATABASE_PASSWORD=mypassword
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: vuepy
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  db_data:
