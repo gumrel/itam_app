@@ -1,19 +1,10 @@
 # Используем официальный Python образ в качестве базового
 FROM python:3.9-slim
 
-# Устанавливаем переменные окружения для предотвращения вопросов от apt
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Обновляем apt-get и устанавливаем зависимости
-RUN apt-get update -o Acquire::ForceIPv4=true && \
-    apt-get install -y --no-install-recommends \
-        gcc \
-        libpq-dev \
-        libssl-dev \
-        libffi-dev \
-        python3-dev && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Обновляем apt-get и устанавливаем зависимости для сборки psycopg2
+RUN apt-get update && \
+    apt-get install -y gcc libpq-dev libssl-dev libffi-dev python3-dev && \
+    apt-get clean
 
 # Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
