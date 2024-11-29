@@ -1,10 +1,14 @@
 # Используем официальный Python образ в качестве базового
 FROM python:3.9-slim
 
-# Обновляем apt-get и устанавливаем зависимости для сборки psycopg2
-RUN apt-get update && \
-    apt-get install -y gcc libpq-dev libssl-dev libffi-dev python3-dev && \
-    apt-get clean
+# Обновляем список пакетов
+RUN apt-get update
+
+# Устанавливаем необходимые зависимости для сборки
+RUN apt-get install -y gcc libpq-dev libssl-dev libffi-dev python3-dev
+
+# Очищаем кэш apt
+RUN apt-get clean
 
 # Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
