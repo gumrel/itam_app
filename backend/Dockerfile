@@ -1,32 +1,22 @@
-# FROM python:3.9-slim
-
-# RUN apt-get update && apt-get install -y gcc libpq-dev
-
-# # Установите рабочую директорию
-# WORKDIR /app
-
-# # Скопируйте requirements.txt
-# COPY requirements.txt .
-
-# # Установите зависимости
-# RUN pip install --no-cache-dir -r requirements.txt
-
-# Использование базового образа Python
+# Используем официальный Python образ в качестве базового
 FROM python:3.9-slim
 
-# Установка необходимых зависимостей
-RUN apt-get update && apt-get install -y gcc libpq-dev
+# Обновляем apt-get и устанавливаем зависимости для сборки psycopg2
+RUN apt-get update && \
+    apt-get install -y gcc libpq-dev libssl-dev libffi-dev python3-dev && \
+    apt-get clean
 
-# Установка зависимостей из requirements.txt
-COPY requirements.txt /app/
+# Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
+
+# Копируем все файлы проекта в контейнер
+COPY . /app/
+
+# Устанавливаем зависимости из requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копирование кода приложения
-COPY . /app
+# Открываем порт для взаимодействия с приложением
+EXPOSE 8000
 
-# Открытие порта
-EXPOSE 5001
-
-# Запуск приложения Flask
+# Определяем команду для запуска приложения
 CMD ["python", "app.py"]
