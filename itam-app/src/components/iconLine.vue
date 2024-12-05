@@ -1,25 +1,11 @@
-<script setup>
-const icons = [
-	'css',
-	'django',
-	'flask',
-	'go',
-	'java',
-	'js',
-	'postgr',
-	'next',
-	'py',
-	'redis',
-	'sass',
-	'sql',
-	'vite',
-	'wp',
-];
+<script setup lang="ts">
+const icons = ['css', 'django', 'flask', 'java', 'js', 'postgr', 'next', 'py', 'redis', 'sass', 'sql', 'vite', 'wp'];
 </script>
 
 <template>
 	<div class="overflow-hidden w-full">
 		<div class="flex gap-10 animate-scroll whitespace-nowrap">
+			<!-- Первый набор иконок -->
 			<div
 				v-for="icon in icons"
 				:key="icon"
@@ -32,6 +18,7 @@ const icons = [
 				/>
 			</div>
 
+			<!-- Второй набор иконок для бесконечной прокрутки -->
 			<div
 				v-for="icon in icons"
 				:key="'dup-' + icon"
@@ -47,4 +34,18 @@ const icons = [
 	</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+.animate-scroll {
+	animation: scroll 40s linear infinite;
+	display: flex;
+}
+</style>
