@@ -3,7 +3,17 @@ module.exports = {
 	darkMode: 'class',
 	content: ['./src/components/**/*.{vue,js,ts}', './src/layouts/**/*.vue', './src/pages/**/*.vue', './src/app.vue'],
 	theme: {
-		extend: {},
+		extend: {
+			keyframes: {
+				scroll: {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-100%)' },
+				},
+			},
+			animation: {
+				scroll: 'scroll 15s linear infinite',
+			},
+		},
 		screens: {
 			xs: '480px',
 			sm: '640px',

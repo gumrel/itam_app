@@ -12,7 +12,7 @@ const mobileMenuOpen = ref(false);
 <template>
 	<header class="bg-000000 border-b-2 border-black">
 		<div
-			class="mx-auto flex max-w-7xl items-center xl:justify-between justify-between p-5"
+			class="mx-auto flex max-w-screen-2xl items-center xl:justify-between justify-between p-5"
 			aria-label="Global"
 		>
 			<NuxtLink
@@ -21,7 +21,7 @@ const mobileMenuOpen = ref(false);
 			>
 				<img
 					class="h-7 cursor-pointer"
-					src="~/assets/img/itam.png"
+					src="~/assets/svg/itam.svg"
 					alt="itam"
 				/>
 			</NuxtLink>
