@@ -13,12 +13,12 @@ function closeModal() {
 </script>
 
 <template>
-	<button
-		class="btn"
+	<img
+		class="h-8 mt-2 cursor-pointer"
 		@click="openModal"
-	>
-		Log in
-	</button>
+		src="~assets/img/qlementine-icons_user-16.png"
+		alt=""
+	/>
 
 	<dialog
 		ref="modal"

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { login } from '~/services/auth/authApi';
+import { login } from '@/services/auth/authApi';
 import type { IUser } from '~/services/commentsTypes';
 
 export const useAuthStore = defineStore(
