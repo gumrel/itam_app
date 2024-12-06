@@ -1,12 +1,32 @@
-<script setup>
+<script setup lang="ts">
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
+import { useRouter } from 'vue-router';
+import httpService from '~/services/httpService';
+import Dbutton from './ui/Dbutton.vue';
+
+const router = useRouter();
+const navigateToMeets = () => {
+	router.push('/meets');
+};
+
+const getMeets = ref();
+
+const getImg = async () => {
+	try {
+		const data = await httpService.get('https://e7d8a4eab9d32595.mokky.dev/meets');
+		getMeets.value = data;
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
 </script>
 
 <template>
 	<div class="mt-16">
 		<Swiper
-			slidesPerView="1"
+			:slidesPerView="1"
 			pagination
 			:breakpoints="{
 				1440: {
@@ -50,7 +70,10 @@ import 'swiper/swiper-bundle.css';
 			</SwiperSlide>
 
 			<SwiperSlide>
-				<div class="octagon-container bg-success border-0 border-white flex flex-col justify-between h-full">
+				<div
+					@click="navigateToMeets()"
+					class="octagon-container bg-success border-0 border-white flex flex-col justify-between h-full"
+				>
 					<div class="text-black text-center pt-5 text-lg font-medium">СМОТРЕТЬ ВСЕ</div>
 					<div class="flex justify-center items-end">
 						<img

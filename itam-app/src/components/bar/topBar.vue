@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import { Dialog, DialogPanel, Disclosure, DisclosureButton } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon } from '@heroicons/vue/20/solid';
-import Dbutton from './ui/Dbutton.vue';
+import Dbutton from '../ui/Dbutton.vue';
 
 const mobileMenuOpen = ref(false);
 </script>

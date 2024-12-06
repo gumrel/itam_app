@@ -1,5 +1,6 @@
 <script setup>
 import { useThemeStore } from '~/stores/themeStore.ts';
+import TopBar from './components/bar/topBar.vue';
 
 const route = useRoute();
 const themeStore = useThemeStore();
@@ -14,7 +15,7 @@ if (route.path.includes('/adminPanel')) {
 // const user = useCookie('auth');
 // console.log(user.value.isLoading);
 const authStore = useAuthStore();
-console.log(authStore.user);
+// console.log(authStore.user);
 useHead({
 	title: 'itam-app',
 });
@@ -28,5 +29,7 @@ useHead({
 		<!-- <NuxtLayout> -->
 		<NuxtPage />
 		<!-- </NuxtLayout> -->
+
+		<BarButtomBar />
 	</div>
 </template>
