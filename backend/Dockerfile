@@ -1,5 +1,5 @@
 # Используем официальный Python образ в качестве базового
-FROM python:3.9-slim
+FROM python:3.11.7-slim
 
 # Обновляем список пакетов
 RUN apt-get update
