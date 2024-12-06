@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import BigButton from '~/components/ui/BigButton.vue';
-
 const authStore = useAuthStore();
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
+import MeetChoose from '~/components/meetChoose.vue';
 
 const ast = async () => {
 	authStore.getMe();
@@ -13,9 +9,9 @@ const ast = async () => {
 
 <template>
 	<div class="mx-auto flex-col max-w-screen-2xl items-center xl:justify-between justify-between p-5 mt-10">
-		<p class="">Мы – ИТ-комьюнити нового поколения,</p>
-		<p class="">состоящее из мотивированных и талантливых</p>
-		<p class="">участников.</p>
+		<h3 class="">Мы – ИТ-комьюнити нового поколения,</h3>
+		<h3 class="">состоящее из мотивированных и талантливых</h3>
+		<h3 class="">участников.</h3>
 
 		<div class="flex xl:flex-row flex-col justify-between mt-10">
 			<img
@@ -48,29 +44,7 @@ const ast = async () => {
 		<MeetSwiper />
 		<!-- доделать чобы брать изображения из запросов -->
 
-		<div class="flex flex-col sm:flex-row pb-16 border-b-2 border-neutral">
-			<div>
-				<h1
-					v-motion-fade-visible-once
-					class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-36"
-				>
-					ВЫБРАТЬ МЕРОПРИЯТИЕ
-				</h1>
-				<p
-					v-motion-fade-visible-once
-					class="mt-5"
-				>
-					// ПОЛНЫЙ СПИСОК ПРЕДСТОЯЩИХ МЕРОПРИЯТИЙ
-				</p>
-			</div>
-			<BigButton
-				@click="router.push('/meets')"
-				v-motion-fade-visible-once
-				class="ml-auto sm:mt-32 mt-5"
-				buttonSize="large"
-				button-color="white"
-			/>
-		</div>
+		<MeetChoose />
 
 		<div>
 			<h1

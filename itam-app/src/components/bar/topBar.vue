@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 
-import { Dialog, DialogPanel, Disclosure, DisclosureButton } from '@headlessui/vue';
+import { Dialog, DialogPanel } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { ChevronDownIcon } from '@heroicons/vue/20/solid';
 import Dbutton from '../ui/Dbutton.vue';
 
+import { useRouter } from 'vue-router';
+
 const mobileMenuOpen = ref(false);
+const router = useRouter();
 </script>
 
 <template>
@@ -42,7 +44,7 @@ const mobileMenuOpen = ref(false);
 
 			<div class="hidden lg:flex lg:flex-1 lg:justify-end">
 				<Dbutton
-					@click=""
+					@click="router.push('/adminPanel')"
 					buttonText="МОИ МЕРОПРИЯТИЯ"
 					buttonColor="purple"
 					class="mr-6 mt-1"

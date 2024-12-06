@@ -5,7 +5,6 @@ const icons = ['css', 'django', 'flask', 'java', 'js', 'postgr', 'next', 'py', '
 <template>
 	<div class="overflow-hidden w-full">
 		<div class="flex gap-10 animate-scroll whitespace-nowrap">
-			<!-- Первый набор иконок -->
 			<div
 				v-for="icon in icons"
 				:key="icon"
@@ -18,7 +17,6 @@ const icons = ['css', 'django', 'flask', 'java', 'js', 'postgr', 'next', 'py', '
 				/>
 			</div>
 
-			<!-- Второй набор иконок для бесконечной прокрутки -->
 			<div
 				v-for="icon in icons"
 				:key="'dup-' + icon"

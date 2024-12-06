@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from 'vue';
+
 const props = defineProps({
 	buttonText: {
 		type: String,
@@ -15,12 +17,12 @@ const buttonColor = computed(() => {
 	return props.buttonColor === 'green' ? '#C6FC2B' : '#6300DB';
 });
 
-const onPress = () => {
-	document.querySelector('.custom-btn').style.transform = 'scale(0.95)';
+const onPress = event => {
+	event.target.style.transform = 'scale(0.95)';
 };
 
-const onRelease = () => {
-	document.querySelector('.custom-btn').style.transform = 'scale(1)';
+const onRelease = event => {
+	event.target.style.transform = 'scale(1)';
 };
 </script>
 
@@ -38,16 +40,15 @@ const onRelease = () => {
 
 <style scoped>
 .custom-btn {
-	padding: 0.25rem 1rem; /* Отступы */
-	border-radius: 4px; /* Прямые углы */
-	font-weight: 500; /* Полужирный текст */
-	height: 40px; /* Высота кнопки */
-	transition: background-color 0.3s ease-in-out, transform 0.1s ease; /* Плавный переход для фона и масштаба */
+	padding: 0.25rem 1rem;
+	border-radius: 4px;
+	font-weight: 500;
+	height: 40px;
+	transition: background-color 0.3s ease-in-out, transform 0.1s ease;
 	color: black;
 
-	/* Ховер-эффект */
 	&:hover {
-		background-color: darken(var(--button-color), 10%); /* Более тёмный цвет */
+		background-color: #440099;
 	}
 }
 </style>

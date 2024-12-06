@@ -26,37 +26,72 @@ const a = async () => {
 
 	jsony.value = data;
 };
-// f();
-// const store = useAuthStore();
-// store.getMe();
 </script>
 
 <template>
-	<div class="card sm:w-96 w-48 shadow-xl m-10">
-		<div class="card-body items-center text-center">
-			<h2 class="card-title">Shoes!</h2>
-			<p class="sm:text-3xl text-sm">If a dog chews shoes whose shoes does he choose?</p>
-			<div class="card-actions">
-				<NuxtLink
-					class="btn btn-primary"
-					to="/"
-					>to /</NuxtLink
+	<div class="flex justify-between p-5 mx-auto max-w-screen-2xl">
+		<div class="flex">
+			<div>
+				<h1
+					v-motion-fade-visible-once
+					class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-16"
 				>
+					КАЛЕНДАРЬ
+				</h1>
+				<h1
+					v-motion-fade-visible-once
+					class="text-4xl lg:text-6xl xl:text-8xl font-light text-white"
+				>
+					МЕРОПРИЯТИЙ
+				</h1>
 			</div>
+			<!-- <input
+				type="text"
+				placeholder="поиск по названию"
+				class="input input-bordered w-full max-w-xl input-success"
+			/> -->
 		</div>
-
-		<button
-			class="btn btn-secondary m-5"
-			@click="post"
-		>
-			post
-		</button>
-		<button
-			class="btn btn-info"
-			@click="a"
-		>
-			Log in
-		</button>
-		<pre>{{ jsony }}</pre>
+		<!-- <div>
+			<img
+				class="h-5 w-5"
+				src="~assets/img/search.png"
+				alt=""
+			/>
+		</div> -->
 	</div>
 </template>
+
+<style scoped>
+.search-input {
+	background-image: url('~assets/img/search.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 30px; /* Чтобы текст не перекрывался с изображением */
+}
+</style>
+
+<!-- <div class="card-body items-center text-center">
+	<h2 class="card-title">Shoes!</h2>
+	<p class="sm:text-3xl text-sm">If a dog chews shoes whose shoes does he choose?</p>
+	<div class="card-actions">
+		<NuxtLink
+			class="btn btn-primary"
+			to="/"
+			>to /</NuxtLink
+		>
+	</div>
+</div>
+
+<button
+	class="btn btn-secondary m-5"
+	@click="post"
+>
+	post
+</button>
+<button
+	class="btn btn-info"
+	@click="a"
+>
+	Log in
+</button>
+<pre>{{ jsony }}</pre> -->
