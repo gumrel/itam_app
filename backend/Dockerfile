@@ -1,8 +1,14 @@
 # Используем официальный Python образ в качестве базового
-FROM python:3.11.7-slim
+FROM python:3.11.7-slim as flask
 
 # Обновляем список пакетов
-RUN apt-get update
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем необходимые зависимости для сборки
 RUN apt-get install -y gcc libpq-dev libssl-dev libffi-dev python3-dev
