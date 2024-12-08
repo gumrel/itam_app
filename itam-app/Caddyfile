@@ -1,4 +1,4 @@
-{team3.itatmisis.ru} {
+team3.itatmisis.ru {
     encode gzip
 
     # Прокси для API
@@ -6,16 +6,16 @@
         reverse_proxy api:5001
     }
 
-    # Прокси для WebSocket соединений (WSS) - wss://team3.itatmisis.ru:5000
+    # Прокси для WebSocket соединений (WSS)
     handle /ws/* {
         reverse_proxy http://team3.itatmisis.ru:5000
     }
 
-    # Статические файлы
+    # Статические файлы (после сборки Nuxt)
     handle {
-        root * /app/dist
-        try_files {path} /index.html
-        file_server
+        root * /nuxtapp/.output/public  # Укажите путь к скомпилированным файлам Nuxt
+        try_files {path} /index.html  # Если файл не найден, отдаем index.html
+        file_server  # Обслуживаем файлы
     }
 
     # Обработка ошибок
@@ -26,3 +26,33 @@
     # Поддержка SSL для WSS (автоматически от Let's Encrypt)
     tls youremail@example.com
 }
+
+
+# {team3.itatmisis.ru} {
+#     encode gzip
+
+#     # Прокси для API
+#     handle /api/* {
+#         reverse_proxy api:5001
+#     }
+
+#     # Прокси для WebSocket соединений (WSS) - wss://team3.itatmisis.ru:5000
+#     handle /ws/* {
+#         reverse_proxy http://team3.itatmisis.ru:5000
+#     }
+
+#     # Статические файлы
+#     handle {
+#         root * /app/dist
+#         try_files {path} /index.html
+#         file_server
+#     }
+
+#     # Обработка ошибок
+#     handle_errors {
+#         respond "{err.status_code} {err.status_text}"
+#     }
+
+#     # Поддержка SSL для WSS (автоматически от Let's Encrypt)
+#     tls youremail@example.com
+# }
