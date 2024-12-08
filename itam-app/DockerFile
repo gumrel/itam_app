@@ -33,3 +33,5 @@ EXPOSE 3000
 
 # Команда для запуска приложения
 CMD [ "node", ".output/server/index.mjs" ]
+
+

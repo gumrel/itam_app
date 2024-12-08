@@ -18,3 +18,22 @@ services:
       - "5001:5001" # Прокидываем порт бэкенда
     environment:
       - NODE_ENV=production
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./itam-app/Caddyfile:/etc/caddy/Caddyfile # Путь к Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  caddy_data:
+  caddy_config:
+  static:
