@@ -1,32 +1,20 @@
-# Используем официальный Python образ в качестве базового
-FROM python:3.11.7-slim as flask
+# Используем официальный образ Node.js
+FROM node:18-slim
 
-# Обновляем список пакетов
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libpq-dev \
-    libssl-dev \
-    libffi-dev \
-    python3-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Устанавливаем необходимые зависимости для сборки
-RUN apt-get install -y gcc libpq-dev libssl-dev libffi-dev python3-dev
-
-# Очищаем кэш apt
-RUN apt-get clean
-
-# Устанавливаем рабочую директорию внутри контейнера
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем все файлы проекта в контейнер
-COPY . /app/
+# Копируем package.json и package-lock.json (если он есть)
+COPY package*.json ./
 
-# Устанавливаем зависимости из requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Устанавливаем зависимости
+RUN npm install
 
-# Открываем порт для взаимодействия с приложением
-EXPOSE 8000
+# Копируем весь исходный код
+COPY . .
 
-# Определяем команду для запуска приложения
-CMD ["python", "app.py"]
+# Указываем порт, на котором будет работать сервер
+EXPOSE 5001
+
+# Запускаем сервер
+CMD ["npm", "start"]

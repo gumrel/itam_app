@@ -1,42 +1,20 @@
 version: "3.9"
-
 services:
-  nuxt:
+  frontend:
     build:
-      context: ./itam-app
+      context: ./itam-app # Указываем путь к папке с фронтендом
       dockerfile: DockerFile
-    expose:
-      - "3000"
     ports:
-      - "3000:3000"
-    restart: always
-
-  flask:
-    build:
-      context: ./backend # Папка, где находится ваш Flask проект
-      dockerfile: Dockerfile # Указываем файл Dockerfile для Flask
-    expose:
-      - "5001"
-    ports:
-      - "5001:5001" # Пробрасываем порт 5001 из контейнера на хост
-    environment:
-      - DATABASE_HOST=db
-      - DATABASE_NAME=vuepy
-      - DATABASE_USER=myuser
-      - DATABASE_PASSWORD=mypassword
+      - "3000:3000" # Прокидываем порт фронтенда
     depends_on:
-      - db
-    restart: always
-
-  db:
-    image: postgres:14
+      - backend # Фронтенд зависит от бэкенда
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: vuepy
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    restart: always
+      - API_URL=http://backend:5001 # Указываем API-URL с именем сервиса бэкенда
 
-volumes:
-  db_data:
+  backend:
+    build:
+      context: ./backend # Указываем путь к папке с бэкендом
+    ports:
+      - "5001:5001" # Прокидываем порт бэкенда
+    environment:
+      - NODE_ENV=production

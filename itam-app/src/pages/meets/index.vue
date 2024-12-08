@@ -26,6 +26,12 @@ const a = async () => {
 
 	jsony.value = data;
 };
+
+const gg = async () => {
+	const response = await httpService.get('http://localhost:5001/api');
+
+	console.log(response.message);
+};
 </script>
 
 <template>
@@ -45,6 +51,7 @@ const a = async () => {
 					МЕРОПРИЯТИЙ
 				</h1>
 			</div>
+			<button @click="gg">smt</button>
 			<!-- <input
 				type="text"
 				placeholder="поиск по названию"
