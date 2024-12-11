@@ -6,7 +6,7 @@ team3.itatmisis.ru {
         reverse_proxy api:3000
     }
     handle {
-        root * /app/.output/dist
+        root * /app/dist
         try_files {path} /index.html
         file_server
     }
