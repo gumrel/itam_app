@@ -5,18 +5,13 @@ team3.itatmisis.ru {
     handle /api/* {
         reverse_proxy api:3000
     }
-
     handle {
-    root * /app/.output/public
-    try_files {path} /index.html
-    file_server
+        root * /app/.output/dist
+        try_files {path} /index.html
+        file_server
     }
-
     # Обработка ошибок
     handle_errors {
         respond "{err.status_code} {err.status_text}"
     }
-
-    # Поддержка SSL для WSS (автоматически от Let's Encrypt)
-    tls youremail@example.com
 }
