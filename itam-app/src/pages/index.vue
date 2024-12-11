@@ -1,9 +1,12 @@
 <script setup lang="ts">
-const authStore = useAuthStore();
 import MeetChoose from '~/components/meetChoose.vue';
+import { useRouter } from 'vue-router';
 
-const ast = async () => {
-	// authStore.getMe();
+const router = useRouter();
+const authStore = useAuthStore();
+
+const click_fun = async () => {
+	router.push('/meets');
 };
 </script>
 
@@ -38,7 +41,11 @@ const ast = async () => {
 
 		<MeetSwiper />
 
-		<MeetChoose />
+		<MeetChoose
+			main_text="ВЫБРАТЬ МЕРОПРИЯТИЕ"
+			buttom_text="// ПОЛНЫЙ СПИСОК ПРЕДСТОЯЩИХ МЕРОПРИЯТИЙ"
+			:function="click_fun"
+		/>
 
 		<h1 class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-16">ФОТООТЧЕТЫ</h1>
 

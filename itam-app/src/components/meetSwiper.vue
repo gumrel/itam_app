@@ -62,7 +62,7 @@ getImg();
 
 			<SwiperSlide
 				v-for="(meet, index) in getMeets"
-				:key="`limited-${index}`"
+				:key="index"
 			>
 				<div class="octagon-container">
 					<div class="octagon-border">

@@ -20,7 +20,27 @@ const meetData = ref<MeetData>({
 	type: '',
 	max_participants: '',
 	online_link: '',
+	meet_programm: [],
 });
+
+const newCase = ref<{ start_case: string; end_case: string; case_info: string }>({
+	start_case: '',
+	end_case: '',
+	case_info: '',
+});
+
+const addCase = () => {
+	if (newCase.value.start_case && newCase.value.end_case && newCase.value.case_info) {
+		meetData.value.meet_programm.push({ ...newCase.value });
+		newCase.value.start_case = '';
+		newCase.value.end_case = '';
+		newCase.value.case_info = '';
+	}
+};
+
+const removeCase = (index: number) => {
+	meetData.value.meet_programm.splice(index, 1);
+};
 
 const formatDate = (date: string): string => {
 	const options: Intl.DateTimeFormatOptions = {
@@ -62,7 +82,10 @@ const sendImg = async () => {
 </script>
 
 <template>
-	<div class="p-5 mx-auto max-w-screen-lg shadow-lg rounded-lg">
+	<div
+		v-motion-fade-visible-once
+		class="p-5 mx-auto max-w-screen-lg shadow-lg rounded-lg"
+	>
 		<h1 class="text-4xl font-semibold text-center">панель администратора</h1>
 		<p class="text-lg text-center mt-2">создание мероприятия</p>
 
@@ -158,6 +181,72 @@ const sendImg = async () => {
 					@change="onFileChange"
 					class="file-input file-input-bordered file-input-success w-full mt-3"
 				/>
+			</div>
+
+			<div>
+				<h3 class="text-lg font-semibold">Программа мероприятия</h3>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-3">
+					<div>
+						<label class="block text-sm font-medium text-gray-600">Начало</label>
+						<input
+							type="time"
+							v-model="newCase.start_case"
+							class="input input-bordered input-success w-full"
+							placeholder="Начало"
+						/>
+					</div>
+					<div>
+						<label class="block text-sm font-medium text-gray-600">Конец</label>
+						<input
+							type="time"
+							v-model="newCase.end_case"
+							class="input input-bordered input-success w-full"
+							placeholder="Конец"
+						/>
+					</div>
+				</div>
+				<div class="mt-3">
+					<label class="block text-sm font-medium text-gray-600">Описание кейса</label>
+					<textarea
+						v-model="newCase.case_info"
+						placeholder="Описание кейса"
+						class="textarea textarea-success w-full"
+					></textarea>
+				</div>
+				<div class="text-right mt-3">
+					<button
+						class="btn btn-success"
+						@click="addCase"
+					>
+						Добавить тайминг
+					</button>
+				</div>
+			</div>
+
+			<div
+				v-if="meetData.meet_programm.length"
+				class="mt-5"
+			>
+				<h4 class="text-md font-medium">Тайминги:</h4>
+				<ul>
+					<li
+						v-for="(item, index) in meetData.meet_programm"
+						:key="index"
+						class="flex justify-between items-center mt-2"
+					>
+						<div>
+							<span class="font-semibold">С:</span> {{ item.start_case }}
+							<span class="font-semibold">По:</span> {{ item.end_case }}
+							<span class="font-semibold">Описание:</span> {{ item.case_info }}
+						</div>
+						<button
+							class="btn btn-error btn-sm"
+							@click="removeCase(index)"
+						>
+							Удалить
+						</button>
+					</li>
+				</ul>
 			</div>
 
 			<div>

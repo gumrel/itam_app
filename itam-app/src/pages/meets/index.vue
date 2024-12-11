@@ -1,42 +1,31 @@
 <script setup>
-import axios from 'axios';
+import Advertisements from '~/components/kalendar/advertisements.vue';
 import httpService from '~/services/httpService';
 
 // definePageMeta({
 // 	middleware: ['auth'],
 // });
 
-const post = async () => {
-	try {
-		const data = await httpService.post('https://e7d8a4eab9d32595.mokky.dev/meets', 1);
+const getMeets = ref();
 
-		console.log(data);
+const getImg = async () => {
+	try {
+		const data = await httpService.get('https://e7d8a4eab9d32595.mokky.dev/meets');
+		getMeets.value = data;
 	} catch (error) {
 		console.error(error);
 		throw error;
 	}
 };
-const jsony = ref();
-const a = async () => {
-	const data = await httpService.get('https://e7d8a4eab9d32595.mokky.dev/users', {
-		headers: {
-			Authorization: `Bearer {getCookie('token')}`, // пример ручного ввода токена
-		},
-	});
-
-	jsony.value = data;
-};
-
-const gg = async () => {
-	const response = await httpService.get('http://localhost:5001/api');
-
-	console.log(response.message);
-};
+getImg();
 </script>
 
 <template>
-	<div class="flex justify-between p-5 mx-auto max-w-screen-2xl">
-		<div class="flex">
+	<div
+		v-motion-fade-visible-once
+		class="mx-auto max-w-screen-2xl h-full p-5"
+	>
+		<div class="flex justify-between sm:flex-row flex-col mb-16">
 			<div>
 				<h1
 					v-motion-fade-visible-once
@@ -51,21 +40,35 @@ const gg = async () => {
 					МЕРОПРИЯТИЙ
 				</h1>
 			</div>
-			<button @click="gg">smt</button>
 
-			<label class="input input-bordered flex items-center gap-2 mb-2">
+			<div class="sm:mt-auto mt-5 flex">
+				<label class="input input-bordered flex items-center gap-2 mb-2 bottom-0 w-56">
+					<img
+						class="h-4"
+						src="~assets/img/search.png"
+						alt=""
+					/>
+					<input
+						type="text"
+						class="grow"
+						placeholder="поиск по названию"
+					/>
+				</label>
 				<img
-					class="h-4"
-					src="~assets/img/search.png"
+					class="h-8 mt-2 ml-5 cursor-pointer"
+					src="~assets/img/Vector.png"
 					alt=""
 				/>
-				<input
-					type="text"
-					class="grow"
-					placeholder="поиск по названию"
-				/>
-			</label>
+			</div>
 		</div>
+		<Advertisements
+			v-for="(meet, index) in getMeets"
+			:key="index"
+			:image="meet.image_base64"
+			:tag="meet.start_date"
+			:time="meet.tag"
+			:name="meet.name"
+		/>
 	</div>
 </template>
 
@@ -77,29 +80,3 @@ const gg = async () => {
 	padding-left: 30px; /* Чтобы текст не перекрывался с изображением */
 }
 </style>
-
-<!-- <div class="card-body items-center text-center">
-	<h2 class="card-title">Shoes!</h2>
-	<p class="sm:text-3xl text-sm">If a dog chews shoes whose shoes does he choose?</p>
-	<div class="card-actions">
-		<NuxtLink
-			class="btn btn-primary"
-			to="/"
-			>to /</NuxtLink
-		>
-	</div>
-</div>
-
-<button
-	class="btn btn-secondary m-5"
-	@click="post"
->
-	post
-</button>
-<button
-	class="btn btn-info"
-	@click="a"
->
-	Log in
-</button>
-<pre>{{ jsony }}</pre> -->
