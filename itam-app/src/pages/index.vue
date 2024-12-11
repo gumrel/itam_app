@@ -3,7 +3,7 @@ const authStore = useAuthStore();
 import MeetChoose from '~/components/meetChoose.vue';
 
 const ast = async () => {
-	authStore.getMe();
+	// authStore.getMe();
 };
 </script>
 

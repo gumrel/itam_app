@@ -1,20 +1,7 @@
 <script setup lang="ts">
 import httpService from '~/services/httpService';
 import Dbutton from '~/components/ui/Dbutton.vue';
-
-interface MeetData {
-	image_base64: string;
-	created_at: string;
-	start_date: string;
-	end_date: string;
-	name: string;
-	location: string;
-	description: string;
-	tag: string;
-	type: string;
-	max_participants: string;
-	online_link: string;
-}
+import type { MeetData } from '~/services/meets/meets.types';
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const imageUrl = ref<string>();

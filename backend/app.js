@@ -1,30 +1,33 @@
 const express = require("express");
+const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
 const cors = require("cors");
+const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express();
 
+require("./config/db");
+
+// Middleware
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*", // Разрешает доступ с любого домена
     methods: ["GET", "POST", "PUT", "DELETE"], // Разрешенные методы
     allowedHeaders: ["Content-Type", "Authorization"], // Разрешенные заголовки
   })
 );
 
-// app.use(
-//   cors({
-//     origin: "http://frontend:3000", // Имя сервиса фронтенда из docker-compose
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
+app.use(express.json());
 
-// Пример API маршрута
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from Express!" });
 });
 
-const port = 5001;
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+const PORT = 5001;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

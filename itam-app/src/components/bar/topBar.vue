@@ -28,7 +28,7 @@ const router = useRouter();
 				/>
 			</NuxtLink>
 
-			<div class="flex lg:hidden">
+			<!-- <div class="flex lg:hidden">
 				<button
 					type="button"
 					class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -40,14 +40,14 @@ const router = useRouter();
 						aria-hidden="true"
 					/>
 				</button>
-			</div>
+			</div> -->
 
-			<div class="hidden lg:flex lg:flex-1 lg:justify-end">
+			<div class="flex lg:justify-end">
 				<Dbutton
 					@click="router.push('/adminPanel')"
 					buttonText="МОИ МЕРОПРИЯТИЯ"
 					buttonColor="purple"
-					class="mr-6 mt-1"
+					class="mr-6 mt-1 hidden sm:block"
 				/>
 
 				<img

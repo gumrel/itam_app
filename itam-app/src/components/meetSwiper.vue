@@ -21,6 +21,7 @@ const getImg = async () => {
 		throw error;
 	}
 };
+getImg();
 </script>
 
 <template>
@@ -44,32 +45,6 @@ const getImg = async () => {
 			}"
 		>
 			<SwiperSlide>
-				<div class="octagon-container">
-					<div class="octagon-border">
-						<div class="octagon-content">
-							<img
-								src="https://sun9-38.userapi.com/impg/BSBJP6WLZnBlQNdt1zr70KT47GVQf3IPQJqrqA/1SwqafgLOeA.jpg?size=807x807&quality=96&sign=82e401094752d447228f9f31889b3a27&c_uniq_tag=ig8S5gURpKV3m7L1l5X7E83fXY0WwPRnuCDCcWBDQik&type=album"
-								alt="Image 1"
-							/>
-						</div>
-					</div>
-				</div>
-			</SwiperSlide>
-
-			<SwiperSlide>
-				<div class="octagon-container">
-					<div class="octagon-border">
-						<div class="octagon-content">
-							<img
-								src="https://sun9-38.userapi.com/impg/BSBJP6WLZnBlQNdt1zr70KT47GVQf3IPQJqrqA/1SwqafgLOeA.jpg?size=807x807&quality=96&sign=82e401094752d447228f9f31889b3a27&c_uniq_tag=ig8S5gURpKV3m7L1l5X7E83fXY0WwPRnuCDCcWBDQik&type=album"
-								alt="Image 1"
-							/>
-						</div>
-					</div>
-				</div>
-			</SwiperSlide>
-
-			<SwiperSlide>
 				<div
 					@click="navigateToMeets()"
 					class="octagon-container bg-success border-0 border-white flex flex-col justify-between h-full"
@@ -85,39 +60,16 @@ const getImg = async () => {
 				</div>
 			</SwiperSlide>
 
-			<SwiperSlide>
+			<SwiperSlide
+				v-for="(meet, index) in getMeets"
+				:key="`limited-${index}`"
+			>
 				<div class="octagon-container">
 					<div class="octagon-border">
 						<div class="octagon-content">
 							<img
-								src="https://sun9-38.userapi.com/impg/BSBJP6WLZnBlQNdt1zr70KT47GVQf3IPQJqrqA/1SwqafgLOeA.jpg?size=807x807&quality=96&sign=82e401094752d447228f9f31889b3a27&c_uniq_tag=ig8S5gURpKV3m7L1l5X7E83fXY0WwPRnuCDCcWBDQik&type=album"
-								alt="Image 1"
-							/>
-						</div>
-					</div>
-				</div>
-			</SwiperSlide>
-
-			<SwiperSlide>
-				<div class="octagon-container">
-					<div class="octagon-border">
-						<div class="octagon-content">
-							<img
-								src="https://sun9-38.userapi.com/impg/BSBJP6WLZnBlQNdt1zr70KT47GVQf3IPQJqrqA/1SwqafgLOeA.jpg?size=807x807&quality=96&sign=82e401094752d447228f9f31889b3a27&c_uniq_tag=ig8S5gURpKV3m7L1l5X7E83fXY0WwPRnuCDCcWBDQik&type=album"
-								alt="Image 1"
-							/>
-						</div>
-					</div>
-				</div>
-			</SwiperSlide>
-
-			<SwiperSlide>
-				<div class="octagon-container">
-					<div class="octagon-border">
-						<div class="octagon-content">
-							<img
-								src="https://sun9-38.userapi.com/impg/BSBJP6WLZnBlQNdt1zr70KT47GVQf3IPQJqrqA/1SwqafgLOeA.jpg?size=807x807&quality=96&sign=82e401094752d447228f9f31889b3a27&c_uniq_tag=ig8S5gURpKV3m7L1l5X7E83fXY0WwPRnuCDCcWBDQik&type=album"
-								alt="Image 1"
+								:src="meet.image_base64"
+								:alt="meet.name || `Image ${index + 1}`"
 							/>
 						</div>
 					</div>

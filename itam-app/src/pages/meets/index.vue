@@ -52,19 +52,20 @@ const gg = async () => {
 				</h1>
 			</div>
 			<button @click="gg">smt</button>
-			<!-- <input
-				type="text"
-				placeholder="поиск по названию"
-				class="input input-bordered w-full max-w-xl input-success"
-			/> -->
+
+			<label class="input input-bordered flex items-center gap-2 mb-2">
+				<img
+					class="h-4"
+					src="~assets/img/search.png"
+					alt=""
+				/>
+				<input
+					type="text"
+					class="grow"
+					placeholder="поиск по названию"
+				/>
+			</label>
 		</div>
-		<!-- <div>
-			<img
-				class="h-5 w-5"
-				src="~assets/img/search.png"
-				alt=""
-			/>
-		</div> -->
 	</div>
 </template>
 

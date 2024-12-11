@@ -5,6 +5,8 @@ import type { IUser } from '~/services/commentsTypes';
 export const useAuthStore = defineStore(
 	'auth',
 	() => {
+		const auth_token = ref<string>();
+
 		const isLoading = ref<boolean>(false);
 		const user = ref<IUser | null>();
 
@@ -29,10 +31,11 @@ export const useAuthStore = defineStore(
 		};
 
 		return {
-			user,
-			isLoading,
-			getMe,
-			logOut,
+			// user,
+			// isLoading,
+			// getMe,
+			// logOut,
+			auth_token,
 		};
 	},
 	{
