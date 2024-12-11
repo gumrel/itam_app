@@ -8,7 +8,10 @@ const ast = async () => {
 </script>
 
 <template>
-	<div class="mx-auto flex-col max-w-screen-2xl items-center xl:justify-between justify-between p-5 mt-10">
+	<div
+		v-motion-fade-visible-once
+		class="mx-auto flex-col max-w-screen-2xl items-center xl:justify-between justify-between p-5 mt-10"
+	>
 		<h3 class="">Мы – ИТ-комьюнити нового поколения,</h3>
 		<h3 class="">состоящее из мотивированных и талантливых</h3>
 		<h3 class="">участников.</h3>
@@ -21,10 +24,7 @@ const ast = async () => {
 				alt="itam"
 			/>
 			<div class="ml-auto">
-				<h1
-					v-motion-fade-visible-once
-					class="text-4xl lg:text-6xl xl:text-8xl font-light text-white md:pl-52 xl:mt-0 mt-24"
-				>
+				<h1 class="text-4xl lg:text-6xl xl:text-8xl font-light text-white md:pl-52 xl:mt-0 mt-24">
 					// ITAM МЕРОПРИЯТИЯ
 				</h1>
 			</div>
@@ -34,25 +34,14 @@ const ast = async () => {
 			<iconLine />
 		</div>
 
-		<h1
-			v-motion-fade-visible-once
-			class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-28"
-		>
-			МЕРОПРИЯТИЯ
-		</h1>
+		<h1 class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-28">МЕРОПРИЯТИЯ</h1>
 
 		<MeetSwiper />
-		<!-- доделать чобы брать изображения из запросов -->
 
 		<MeetChoose />
 
-		<div>
-			<h1
-				v-motion-fade-visible-once
-				class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-16"
-			>
-				ФОТООТЧЕТЫ
-			</h1>
-		</div>
+		<h1 class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-16">ФОТООТЧЕТЫ</h1>
+
+		<PhotoResume />
 	</div>
 </template>

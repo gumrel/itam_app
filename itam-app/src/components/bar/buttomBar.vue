@@ -10,7 +10,10 @@ const mobileMenuOpen = ref(false);
 </script>
 
 <template>
-	<div class="bg-000000 mt-10">
+	<div
+		v-motion-fade-visible-once
+		class="bg-000000"
+	>
 		<div class="flex justify-between p-5 mx-auto max-w-screen-2xl">
 			<img
 				src="~/assets/svg/itampurple.svg"
