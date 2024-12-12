@@ -3,18 +3,7 @@ team3.itatmisis.ru {
 
     # Прокси для API
     handle /api/* {
-        reverse_proxy api:8000
-    }
-
-    # Прокси для ML
-    handle /ml/* {
-        reverse_proxy ml_app:6969
-    }
-
-    # Прокси для WebSocket соединений (WSS)
-    handle /ws/* {
-        reverse_proxy http://team3.itatmisis.ru:5000
-                      
+        reverse_proxy api:3000
     }
 
     # Статические файлы
