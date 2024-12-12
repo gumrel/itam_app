@@ -1,41 +1,35 @@
 import { defineStore } from 'pinia';
 import { login } from '@/services/auth/authApi';
-import type { IUser } from '~/services/commentsTypes';
+import type { IRegistrationForm } from '~/services/commentsTypes';
 
 export const useAuthStore = defineStore(
 	'auth',
 	() => {
-		const auth_token = ref<string>();
+		const user = ref<IRegistrationForm | null>();
+		const isAdmin = ref<boolean>();
+		const isLoading = ref<boolean>();
 
-		const isLoading = ref<boolean>(false);
-		const user = ref<IUser | null>();
+		// const getMe = async () => {
+		// 	isLoading.value = true;
+		// 	const data = await login();
 
-		// const refreshingError = ref<boolean>(false);
-		// const loginErrorMessage = ref<string | null>(null);
-		// const isAuthinticated = computed<boolean>(() => !!user.value);
-		// const isAdmin = computed<boolean>(() => !!user.value && user.value.is_superuser);
+		// 	if (data) {
+		// 		user.value = data;
+		// 	} else user.value = null;
 
-		const getMe = async () => {
-			isLoading.value = true;
-			const data = await login();
-
-			if (data) {
-				user.value = data;
-			} else user.value = null;
-
-			isLoading.value = false;
-		};
+		// 	isLoading.value = false;
+		// };
 
 		const logOut = async () => {
 			user.value = null;
 		};
 
 		return {
-			// user,
-			// isLoading,
+			user,
+			isAdmin,
+			isLoading,
 			// getMe,
-			// logOut,
-			auth_token,
+			logOut,
 		};
 	},
 	{

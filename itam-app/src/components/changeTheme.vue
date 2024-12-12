@@ -4,34 +4,6 @@ const themeStore = useThemeStore();
 const toggleTheme = () => {
 	themeStore.toggleTheme();
 };
-
-// const getPy = async () => {
-// 	const data = await httpService.get('http://127.0.0.1:5001/api/data', {
-// 		headers: {
-// 			Authorization: `Bearer {getCookie('token')}`, // пример ручного ввода токена
-// 		},
-// 	});
-// 	console.log(data);
-// };
-
-// const sendData = async () => {
-// 	let stringDate = new Date().toISOString();
-// 	try {
-// 		const data = { name: stringDate };
-// 		const res = await httpService.post('http://127.0.0.1:5001/api/data', data);
-// 		console.log(res);
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// };
-
-// const deleteData = async () => {
-// 	try {
-// 		const res = await httpService.delete('http://127.0.0.1:5001/api/data', {
-// 			data: { id: 7 },
-// 		});
-// 	} catch (error) {}
-// };
 </script>
 
 <template>

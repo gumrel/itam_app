@@ -88,40 +88,14 @@ const login = async () => {
 		class="modal"
 	>
 		<div class="modal-box max-w-screen-lg">
-			<!-- <div class="flex mt-10 ml-4 gap-10">
-				<div>
-					<h1>* Имя</h1>
-					<label class="input input-bordered flex items-center gap-2 mb-2 mt-5">
-						<input
-							v-model="loginData.email"
-							type="text"
-							class="grow"
-							placeholder="Введите имя"
-						/>
-					</label>
-				</div>
-
-				<div>
-					<h1>* пароль</h1>
-					<label class="input input-bordered flex items-center gap-2 mb-2 mt-5 mr-3">
-						<input
-							v-model="loginData.password"
-							type="password"
-							class="grow"
-							placeholder="Введите пароль"
-						/>
-					</label>
-				</div>
-				<button
-					class="btn btn-primary"
-					@click="login"
-				>
-					логин
-				</button>
-			</div> -->
-
 			<h1 class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-10 ml-4">форма</h1>
 			<h1 class="text-4xl lg:text-6xl xl:text-8xl font-light text-white ml-4">регистрации</h1>
+			<button
+				@click="closeModal"
+				class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 m-8"
+			>
+				✕
+			</button>
 
 			<div class="flex mt-10 ml-4 gap-10">
 				<div>

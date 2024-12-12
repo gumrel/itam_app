@@ -11,13 +11,14 @@ services:
     environment:
       - API_URL=http://backend:5001 # Указываем API-URL с именем сервиса бэкенда
 
-  backend:
-    build:
-      context: ./backend # Указываем путь к папке с бэкендом
-    ports:
-      - "5001:5001" # Прокидываем порт бэкенда
-    environment:
-      - NODE_ENV=production
+
+  # backend:
+  #   build:
+  #     context: ./backend # Указываем путь к папке с бэкендом
+  #   ports:
+  #     - "5001:5001" # Прокидываем порт бэкенда
+  #   environment:
+  #     - NODE_ENV=production
 #   caddy:
 #     image: caddy:latest
 #     container_name: caddy
