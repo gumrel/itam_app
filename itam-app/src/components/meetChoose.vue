@@ -11,6 +11,11 @@ const props = defineProps({
 	function: {
 		type: Function,
 	},
+	color: {
+		type: String,
+		default: 'white',
+		required: false,
+	},
 });
 </script>
 
@@ -35,7 +40,7 @@ const props = defineProps({
 			v-motion-fade-visible-once
 			class="ml-auto sm:mt-32 mt-5"
 			buttonSize="large"
-			button-color="white"
+			:button-color="props.color"
 		/>
 	</div>
 </template>

@@ -2,10 +2,6 @@
 import Advertisements from '~/components/kalendar/advertisements.vue';
 import httpService from '~/services/httpService';
 
-// definePageMeta({
-// 	middleware: ['auth'],
-// });
-
 const getMeets = ref();
 
 const getImg = async () => {

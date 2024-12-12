@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import Dbutton from '../ui/Dbutton.vue';
 import { useRouter } from 'vue-router';
 import RegistrationForm from '../auth/registrationForm.vue';
+import { useAuthStore } from '#imports';
+
+const authStore = useAuthStore();
 
 const router = useRouter();
 </script>
@@ -24,17 +27,30 @@ const router = useRouter();
 				/>
 			</NuxtLink>
 
+			<div
+				v-if="authStore.user && !authStore.isAdmin"
+				class="justify-center"
+			>
+				<Dbutton
+					@click="router.push('/')"
+					buttonText="МОИ МЕРОПРИЯТИЯ"
+					buttonColor="green"
+				></Dbutton>
+			</div>
+
 			<div class="flex lg:justify-end">
 				<Dbutton
+					v-if="authStore.isAdmin"
 					@click="router.push('/adminPanel')"
-					buttonText="МОИ МЕРОПРИЯТИЯ"
+					buttonText="CОЗДАТЬ МЕРОПРИЯТИЕ"
 					buttonColor="purple"
 					class="mr-6 mt-1 hidden sm:block"
 				/>
 
 				<img
+					v-if="authStore.user"
 					class="h-8 mt-2 mr-6 cursor-pointer"
-					@click=""
+					@click="router.push('/notification')"
 					src="~assets/img/material-symbols_notifications.png"
 					alt=""
 				/>
