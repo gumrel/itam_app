@@ -98,7 +98,7 @@ const formattedDescription = computed(() => {
 		/>
 
 		<MeetChoose
-			v-if="authStore.user"
+			v-if="authStore.user && !authStore.isAdmin"
 			main_text="ЗАРЕГИСТРИРОВАТЬСЯ"
 			buttom_text="// РЕГИСТРАЦИЯ ВОЗМОЖНА ПРИ НАЛИЧИ СВОБОДНЫХ МЕСТ"
 		/>

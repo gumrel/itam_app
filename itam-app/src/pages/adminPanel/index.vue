@@ -2,6 +2,9 @@
 import httpService from '~/services/httpService';
 import Dbutton from '~/components/ui/Dbutton.vue';
 import type { MeetData } from '~/services/meets/meets.types';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 definePageMeta({
 	middleware: ['admin'],
@@ -78,6 +81,7 @@ const sendImg = async () => {
 
 		await httpService.post('https://e7d8a4eab9d32595.mokky.dev/meets', meetData.value);
 		if (fileInput.value) fileInput.value.value = '';
+		router.push('/meets');
 	} catch (error) {
 		console.error('Ошибка при отправке данных:', error);
 		throw error;
