@@ -46,8 +46,6 @@
 		<MeetChoose
 			main_text="мои мероприятия"
 			buttom_text="// Полный спиоск предстоящих мероприятий"
-			color="info"
-			:function="click_fun"
 		/>
 	</div>
 </template>

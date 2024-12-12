@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import httpService from '~/services/httpService';
 import { useAuthStore } from '#imports';
 
@@ -193,4 +193,4 @@ const login = async () => {
 			</div>
 		</div>
 	</dialog>
-</template>
+</template> -->
