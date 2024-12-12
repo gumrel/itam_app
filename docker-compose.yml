@@ -1,23 +1,24 @@
 version: "3.9"
+
 services:
   frontend:
     build:
       context: ./itam-app # Указываем путь к папке с фронтендом
       dockerfile: DockerFile
+    restart: unless-stopped
+    init: true
+    env_file:
+      - ./itam-app/.env
     ports:
       - "3000:3000" # Прокидываем порт фронтенда
-    # depends_on:
-    #   - backend # Фронтенд зависит от бэкенда
-    # environment:
-    #   - API_URL=http://backend:5001 # Указываем API-URL с именем сервиса бэкенда
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
 
-  # backend:
-  #   build:
-  #     context: ./backend # Указываем путь к папке с бэкендом
-  #   ports:
-  #     - "5001:5001" # Прокидываем порт бэкенда
-  #   environment:
-  #     - NODE_ENV=production
+volumes:
+  caddy_data:
+  caddy_config:
+  static:
 #   caddy:
 #     image: caddy:latest
 #     container_name: caddy
@@ -32,7 +33,3 @@ services:
 #       - frontend
 #       - backend
 
-# volumes:
-#   caddy_data:
-#   caddy_config:
-#   static:
