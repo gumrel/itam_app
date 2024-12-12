@@ -37,9 +37,9 @@ const borderClass = computed(() => {
 		class="mt-3 rounded-2xl p-1 flex justify-between"
 		:class="borderClass"
 	>
-		<h1 class="flex items-center pl-3 w-24">{{ props.time }}</h1>
+		<h1 class="flex items-center pl-3 w-32 text-xs sm:text-base">{{ props.time }}</h1>
 
-		<h1 class="flex items-center p-3">{{ props.tag }}</h1>
+		<h1 class="flex items-center p-3 text-xs sm:text-base">{{ props.tag }}</h1>
 
 		<div
 			@click="navigateToMeet()"

@@ -3,9 +3,9 @@ import httpService from '~/services/httpService';
 import Dbutton from '~/components/ui/Dbutton.vue';
 import type { MeetData } from '~/services/meets/meets.types';
 
-definePageMeta({
-	middleware: ['auth'],
-});
+// definePageMeta({
+// 	middleware: ['auth'],
+// });
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const imageUrl = ref<string>();

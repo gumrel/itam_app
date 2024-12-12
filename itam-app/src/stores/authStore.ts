@@ -9,17 +9,6 @@ export const useAuthStore = defineStore(
 		const isAdmin = ref<boolean>();
 		const isLoading = ref<boolean>();
 
-		// const getMe = async () => {
-		// 	isLoading.value = true;
-		// 	const data = await login();
-
-		// 	if (data) {
-		// 		user.value = data;
-		// 	} else user.value = null;
-
-		// 	isLoading.value = false;
-		// };
-
 		const logOut = async () => {
 			user.value = null;
 		};
@@ -28,7 +17,6 @@ export const useAuthStore = defineStore(
 			user,
 			isAdmin,
 			isLoading,
-			// getMe,
 			logOut,
 		};
 	},

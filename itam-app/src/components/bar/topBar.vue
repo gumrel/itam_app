@@ -32,7 +32,8 @@ const router = useRouter();
 				class="justify-center"
 			>
 				<Dbutton
-					@click="router.push('/')"
+					@click="router.push('/myMeets')"
+					class="sm:text-base small_font p-4 sm:p-2"
 					buttonText="МОИ МЕРОПРИЯТИЯ"
 					buttonColor="green"
 				></Dbutton>
@@ -47,8 +48,18 @@ const router = useRouter();
 					class="mr-6 mt-1 hidden sm:block"
 				/>
 
+				<button
+					v-if="authStore.isAdmin"
+					@click="router.push('/adminPanel')"
+					class="btn btn-info mr-2 sm:hidden"
+				>
+					<img
+						src="~assets/svg/plus.svg"
+						alt=""
+					/>
+				</button>
+
 				<img
-					v-if="authStore.user"
 					class="h-8 mt-2 mr-6 cursor-pointer"
 					@click="router.push('/notification')"
 					src="~assets/img/material-symbols_notifications.png"
@@ -59,3 +70,15 @@ const router = useRouter();
 		</div>
 	</header>
 </template>
+
+<style>
+.small_font {
+	font-size: 10px;
+}
+@media (min-width: 640px) {
+	.small_font {
+		font-size: 1rem /* 16px */;
+		line-height: 1.5rem /* 24px */;
+	}
+}
+</style>

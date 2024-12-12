@@ -20,6 +20,7 @@ const formData = ref<IRegistrationForm>({
 	group: '',
 	telegram: '',
 	isAdmin: false,
+	meet_subscribe: [],
 });
 
 const loginData = ref({

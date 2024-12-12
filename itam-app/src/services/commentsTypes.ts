@@ -13,4 +13,5 @@ export interface IRegistrationForm {
 	email: string;
 	receiveNotifications: boolean;
 	isAdmin: boolean;
+	meet_subscribe: [];
 }

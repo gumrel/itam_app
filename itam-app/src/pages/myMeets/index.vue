@@ -1,37 +1,35 @@
 <script setup>
 import Advertisements from '~/components/kalendar/advertisements.vue';
 import httpService from '~/services/httpService';
+import { useAuthStore } from '#imports';
+
+definePageMeta({
+	middleware: ['auth'],
+});
+
+const authStore = useAuthStore();
+const Iuser = ref(authStore.user);
 
 const getMeets = ref();
-const filteredMeets = ref([]);
-const searchQuery = ref('');
+const myMeets = ref([]);
 
 const getImg = async () => {
 	try {
 		const data = await httpService.get('https://e7d8a4eab9d32595.mokky.dev/meets');
 		getMeets.value = data;
-		filteredMeets.value = data;
+
+		myMeets.value = getMeets.value.filter(meet =>
+			Iuser.value.meet_subscribe.some(subscribe => subscribe.name === meet.name),
+		);
 	} catch (error) {
 		console.error(error);
 		throw error;
 	}
 };
+
 getImg();
 
-let timeoutId = null;
-
-watch(searchQuery, newQuery => {
-	clearTimeout(timeoutId);
-	timeoutId = setTimeout(() => {
-		if (newQuery) {
-			filteredMeets.value = getMeets.value.filter(meet =>
-				meet.name.toLowerCase().includes(newQuery.toLowerCase()),
-			);
-		} else {
-			filteredMeets.value = getMeets.value;
-		}
-	}, 1500);
-});
+// https://e7d8a4eab9d32595.mokky.dev/meets?name=*IT
 </script>
 
 <template>
@@ -43,19 +41,19 @@ watch(searchQuery, newQuery => {
 			<div>
 				<h1
 					v-motion-fade-visible-once
-					class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-16"
+					class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-8"
 				>
-					КАЛЕНДАРЬ
+					МОИ
 				</h1>
 				<h1
 					v-motion-fade-visible-once
 					class="text-4xl lg:text-6xl xl:text-8xl font-light text-white"
 				>
-					МЕРОПРИЯТИЙ
+					МЕРОПРИЯТИЯ
 				</h1>
 			</div>
 
-			<div class="sm:mt-auto mt-5 flex">
+			<!-- <div class="sm:mt-auto mt-5 flex">
 				<label class="input input-bordered flex items-center gap-2 mb-2 bottom-0 w-56">
 					<img
 						class="h-4"
@@ -75,10 +73,10 @@ watch(searchQuery, newQuery => {
 					src="~assets/img/Vector.png"
 					alt=""
 				/>
-			</div>
+			</div> -->
 		</div>
 		<Advertisements
-			v-for="(meet, index) in filteredMeets"
+			v-for="(meet, index) in myMeets"
 			:key="index"
 			:image="meet.image_base64"
 			:tag="meet.start_date"

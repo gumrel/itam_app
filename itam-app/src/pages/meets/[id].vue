@@ -92,7 +92,7 @@ const formattedDescription = computed(() => {
 		<Advertisements
 			v-for="(meet_pg, index) in currentMeet.meet_programm"
 			:key="index"
-			:time="meet_pg.start_case + meet_pg.end_case"
+			:time="meet_pg.start_case + ' - ' + meet_pg.end_case"
 			:tag="meet_pg.case_info"
 			color="purple"
 		/>
