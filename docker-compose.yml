@@ -6,11 +6,10 @@ services:
       dockerfile: DockerFile
     ports:
       - "3000:3000" # Прокидываем порт фронтенда
-    depends_on:
-      - backend # Фронтенд зависит от бэкенда
-    environment:
-      - API_URL=http://backend:5001 # Указываем API-URL с именем сервиса бэкенда
-
+    # depends_on:
+    #   - backend # Фронтенд зависит от бэкенда
+    # environment:
+    #   - API_URL=http://backend:5001 # Указываем API-URL с именем сервиса бэкенда
 
   # backend:
   #   build:
