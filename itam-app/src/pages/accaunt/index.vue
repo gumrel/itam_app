@@ -2,9 +2,11 @@
 import Dbutton from '~/components/ui/Dbutton.vue';
 import { useAuthStore } from '#imports';
 import httpService from '~/services/httpService';
+import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
 const Iuser = ref(authStore.user);
+const router = useRouter();
 
 const postData = ref({
 	fio: Iuser.value.fio,
@@ -33,9 +35,9 @@ const updateInfo = async () => {
 	}
 };
 
-const isFormValid = computed(() => {
-	return postData.value.fio && postData.value.group && postData.value.telegram;
-});
+const goTomyMeeys = async () => {
+	router.push('/myMeets');
+};
 
 const toggleEditMode = () => {
 	isEditMode.value = !isEditMode.value;
@@ -77,7 +79,7 @@ const toggleEditMode = () => {
 							v-model="postData.fio"
 							type="text"
 							class="grow p-5"
-							placeholder="Введите имя"
+							placeholder="Введите ФИО"
 						/>
 					</label>
 				</div>
@@ -90,7 +92,7 @@ const toggleEditMode = () => {
 							v-model="postData.group"
 							type="text"
 							class="grow p-5"
-							placeholder="Введите Email"
+							placeholder="Введите  группу"
 						/>
 					</label>
 				</div>
@@ -103,7 +105,7 @@ const toggleEditMode = () => {
 							v-model="postData.telegram"
 							type="text"
 							class="grow p-5"
-							placeholder="Введите имя"
+							placeholder="Введите tg"
 						/>
 					</label>
 				</div>
@@ -122,6 +124,7 @@ const toggleEditMode = () => {
 		<MeetChoose
 			main_text="мои мероприятия"
 			buttom_text="// Полный спиоск предстоящих мероприятий"
+			:function="goTomyMeeys"
 		/>
 	</div>
 </template>

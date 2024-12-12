@@ -4,7 +4,9 @@ import { useRoute } from 'vue-router';
 import Advertisements from '~/components/kalendar/advertisements.vue';
 import Dbutton from '~/components/ui/Dbutton.vue';
 import httpService from '~/services/httpService';
+import { useAuthStore } from '#imports';
 
+const authStore = useAuthStore();
 const getMeets = ref(null);
 const route = useRoute();
 
@@ -57,12 +59,10 @@ const formattedDescription = computed(() => {
 			</div>
 		</div>
 
-		<button
-			class="btn btn-success font-light rounded-2xl mt-5"
-			@click=""
-		>
-			ЗАРЕГИСТРИРОВАТЬСЯ
-		</button>
+		<AuthRegisterMeet
+			v-if="authStore.user"
+			:meet_name="currentMeet.name"
+		/>
 
 		<h1 class="text-4xl lg:text-6xl xl:text-8xl font-light text-white mt-36 mb-8">что ждет?</h1>
 
@@ -98,8 +98,15 @@ const formattedDescription = computed(() => {
 		/>
 
 		<MeetChoose
+			v-if="authStore.user"
 			main_text="ЗАРЕГИСТРИРОВАТЬСЯ"
 			buttom_text="// РЕГИСТРАЦИЯ ВОЗМОЖНА ПРИ НАЛИЧИ СВОБОДНЫХ МЕСТ"
+		/>
+
+		<MeetChoose
+			v-if="authStore.isAdmin"
+			main_text="Внести изменения"
+			buttom_text="// НАЖМИТЕ ДЛЯ ИЗМЕНЕНИЯ ДАННЫХ о мероприятии"
 		/>
 	</div>
 </template>

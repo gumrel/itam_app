@@ -1,26 +1,30 @@
-<!-- <script setup lang="ts">
+<script setup>
 import httpService from '~/services/httpService';
 import { useAuthStore } from '#imports';
 
-interface RegistrationForm {
-	firstName: string;
-	password: string;
-	group: string;
-	telegram: string;
-	email: string;
-	receiveNotifications: boolean;
-}
+const props = defineProps({
+	meet_name: {
+		type: String,
+	},
+});
 
-const modal = ref();
+const authStore = useAuthStore();
 
-const formData = ref<RegistrationForm>({
-	firstName: '',
-	password: '',
-	group: '',
-	telegram: '',
+const myId = authStore.user.id;
+
+const formData = ref({
+	name: authStore.user.name,
+	pass: '',
 	email: '',
 	receiveNotifications: false,
+	fio: '',
+	group: '',
+	telegram: '',
+	isAdmin: false,
+	meet_subscribe: [],
 });
+
+const modal = ref();
 
 function openModal() {
 	modal.value?.showModal();
@@ -30,58 +34,32 @@ function closeModal() {
 	modal.value?.close();
 }
 
-const allUsers = async () => {
-	const data = await httpService.get('http://localhost:5001/api/users');
-	console.log(data);
-};
-
-const registration = async () => {
-	const data = await httpService.post('http://localhost:5001/api/users', formData.value);
-	console.log(data);
-};
-
-// /\
-
-interface LoginResponse {
-	token: string;
-}
-
-interface LoginData {
-	email: string;
-	password: string;
-}
-
-const authStorage = useAuthStore();
-
-const loginData = ref({
-	email: '',
-	password: '',
-});
-
-const login = async () => {
+const registerForEvent = async () => {
 	try {
-		const response = await httpService.post<LoginResponse, LoginData>(
-			'http://localhost:5001/api/auth/login',
-			loginData.value,
-		);
-		if (response.token) {
-			authStorage.auth_token = response.token;
-			// localStorage.setItem('auth_token', response.token);
-			console.log(response.token);
-		}
+		const newEvent = { name: props.meet_name };
+		const updatedMeetSubscribe = [...(authStore.user.meet_subscribe || []), newEvent];
+
+		await httpService.patch(`https://e7d8a4eab9d32595.mokky.dev/users/${authStore.user.id}`, {
+			meet_subscribe: updatedMeetSubscribe,
+		});
+
+		authStore.user.meet_subscribe = updatedMeetSubscribe;
+
+		alert(`Вы успешно зарегистрировались на мероприятие "${props.meet_name}"`);
+		closeModal();
 	} catch (error) {
-		console.error('Login failed', error);
+		console.error(error);
 	}
 };
 </script>
 
 <template>
-	<img
-		class="h-8 mt-2 cursor-pointer"
+	<button
+		class="btn btn-success font-light rounded-2xl mt-5"
 		@click="openModal"
-		src="~assets/img/qlementine-icons_user-16.png"
-		alt="User Icon"
-	/>
+	>
+		ЗАРЕГИСТРИРОВАТЬСЯ
+	</button>
 
 	<dialog
 		ref="modal"
@@ -97,12 +75,12 @@ const login = async () => {
 				✕
 			</button>
 
-			<div class="flex mt-10 ml-4 gap-10">
-				<div>
-					<h1>* Имя</h1>
+			<div class="flex sm:mt-10 mt-5 sm:flex-row flex-col ml-4 gap-10">
+				<div class="-mb-8">
+					<h1>* ФИО</h1>
 					<label class="input input-bordered flex items-center gap-2 mb-2 mt-5">
 						<input
-							v-model="formData.firstName"
+							v-model="formData.fio"
 							type="text"
 							class="grow"
 							placeholder="Введите имя"
@@ -111,20 +89,20 @@ const login = async () => {
 				</div>
 
 				<div>
-					<h1>* пароль</h1>
-					<label class="input input-bordered flex items-center gap-2 mb-2 mt-5 mr-3">
+					<h1>* telegram</h1>
+					<label class="input input-bordered flex items-center gap-2 mb-2 mt-5">
 						<input
-							v-model="formData.password"
-							type="password"
+							v-model="formData.telegram"
+							type="text"
 							class="grow"
-							placeholder="Введите пароль"
+							placeholder="Введите Email"
 						/>
 					</label>
 				</div>
 			</div>
 
-			<div class="flex mt-5 ml-5 gap-10">
-				<div>
+			<div class="flex sm:mt-10 mt-5 sm:flex-row flex-col ml-4 gap-10">
+				<div class="-mb-8">
 					<h1>* Учебная группа</h1>
 					<label class="input input-bordered flex items-center gap-2 mb-2 mt-5">
 						<input
@@ -136,21 +114,7 @@ const login = async () => {
 					</label>
 				</div>
 
-				<div>
-					<h1>* Telegram</h1>
-					<label class="input input-bordered flex items-center gap-2 mb-2 mt-5 mr-3">
-						<input
-							v-model="formData.telegram"
-							type="text"
-							class="grow"
-							placeholder="Введите Telegram"
-						/>
-					</label>
-				</div>
-			</div>
-
-			<div class="flex mt-5 ml-5 gap-10">
-				<div>
+				<div class="-mb-8">
 					<h1>* Email</h1>
 					<label class="input input-bordered flex items-center gap-2 mb-2 mt-5">
 						<input
@@ -161,7 +125,9 @@ const login = async () => {
 						/>
 					</label>
 				</div>
+			</div>
 
+			<div class="flex sm:mt-10 mt-5 sm:flex-row flex-col ml-4 gap-10">
 				<div class="flex mt-12 items-center">
 					<h1 class="mb-2">Получать уведомления на почту</h1>
 					<label class="cursor-pointer label mb-3 ml-3">
@@ -174,23 +140,14 @@ const login = async () => {
 				</div>
 			</div>
 
-			<div class="flex justify-between m-5">
-				<button
-					class="btn-primary text-primary"
-					@click="allUsers()"
-				>
-					логин
-				</button>
+			<div class="flex sm:justify-end justify-center m-5">
 				<button
 					class="btn btn-primary"
-					@click="
-						registration();
-						closeModal();
-					"
+					@click="registerForEvent()"
 				>
 					зарегистрироваться
 				</button>
 			</div>
 		</div>
 	</dialog>
-</template> -->
+</template>

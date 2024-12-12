@@ -8,6 +8,7 @@ import { useAuthStore } from '#imports';
 const authStore = useAuthStore();
 
 const router = useRouter();
+//  что то выводить когда мероприятия пустые
 </script>
 
 <template>
