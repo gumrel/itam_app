@@ -6,11 +6,10 @@ team3.itatmisis.ru {
         reverse_proxy api:3000
     }
 
-    # Статические файлы
     handle {
-        root * /app/dist
-        try_files {path} /index.html
-        file_server
+    root * /app/.output/public
+    try_files {path} /index.html
+    file_server
     }
 
     # Обработка ошибок
