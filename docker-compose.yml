@@ -7,8 +7,6 @@ services:
       dockerfile: DockerFile
     restart: unless-stopped
     init: true
-    env_file:
-      - ./itam-app/.env
     ports:
       - "3000:3000" # Прокидываем порт фронтенда
     volumes:

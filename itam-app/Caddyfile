@@ -1,4 +1,4 @@
-{$DOMAIN} {
+team3.itatmisis.ru {
     encode gzip
 
     # Прокси для API
