@@ -20,22 +20,22 @@ RUN npm install && \
     rm -rf /root/.npm
 
 # Production stage
+# Пример для Caddyfile
 FROM caddy:2-alpine
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем Caddyfile для настройки
+# Копируем Caddyfile
 COPY Caddyfile /etc/caddy/Caddyfile
 
-# Копируем собранные файлы из build-stage
+# Копируем сертификаты
+COPY ./certs/my_certificate.crt /etc/caddy/certificates/my_certificate.crt
+COPY ./certs/my_private.key /etc/caddy/certificates/my_private.key
+
+# Копируем статические файлы
 COPY --from=build-stage /nuxtapp/.output/public /app/dist
 
-# Устанавливаем статические файлы, которые Caddy будет обслуживать
-COPY --from=build-stage /nuxtapp/.output/public /app/.output
-
-# Экспонируем порт, на котором будет работать Caddy
 EXPOSE 80
 
-# Запускаем Caddy
 CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+
