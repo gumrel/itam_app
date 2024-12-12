@@ -2,7 +2,7 @@ export default defineNuxtConfig({
 	srcDir: 'src',
 	compatibilityDate: '2024-04-03',
 	devtools: { enabled: true },
-	ssr: true,
+	ssr: false,
 
 	modules: ['@pinia/nuxt', 'pinia-plugin-persistedstate/nuxt', '@vueuse/motion/nuxt'],
 
